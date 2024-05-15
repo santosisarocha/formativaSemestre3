@@ -5,11 +5,12 @@ export default defineNuxtConfig({
     typeCheck: true
   },
   modules: [
-    'nuxt-primevue'
+    'nuxt-primevue',
+    '@sidebase/nuxt-auth'
   ],
   primevue:{
     components: {
-      include : ['Button', 'Avatar', 'InputText', 'FloatLabel']
+      include : ['Button', 'Avatar', 'InputText', 'FloatLabel', 'Menubar']
     }
   },
   css:[
@@ -17,5 +18,18 @@ export default defineNuxtConfig({
     'primevue/resources/themes/aura-light-green/theme.css',
     'primeflex/primeflex.css', 
     '~/assets/global.scss'
-  ]
+  ],
+  auth: {
+    baseURL: 'http://localhost:8000',
+    provider: {
+      type: 'local',
+      endpoints: {
+        signIn:{path: '/token/login', method: 'post'},
+        signOut:{path: '/token/logout', method: 'post'},
+        getSession:{path: '/vendas', method: 'get'},
+      },
+      token: { signInResponseTokenPointer: '/auth_token', type: 'Token'},
+      pages: {login: '/login'}
+    }
+  }
 })

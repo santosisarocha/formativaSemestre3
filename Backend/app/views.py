@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import *
 from .serializers import *
 from rest_framework.viewsets import  ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
@@ -28,6 +29,7 @@ class ProdutosView(ModelViewSet):
 class VendasView(ModelViewSet):
     queryset = Vendas.objects.all()
     serializer_class = VendasSerializer
+    permission_classes = (IsAuthenticated,)
 
 class VendasProdutosView(ModelViewSet):
     queryset = VendasProdutos.objects.all()

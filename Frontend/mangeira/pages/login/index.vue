@@ -2,14 +2,35 @@
 import FloatLabel from 'primevue/floatlabel';
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
+const{ signIn } = useAuth();
+
+definePageMeta({
+    layout: 'login'
+})
+
     const credenciais = reactive({
         email: '',
         password: ''
     });
+    const mensagemErro = ref('');
 
     const fazerLogin = ()=>{
         console.log("login: ", credenciais);
+        signIn(credenciais, {redirect: false})
+        .then(()=>{
+            console.log("logado com sucesso .....");
+            navigateTo('/carrinho')
+        })
+        .catch((error)=>{
+            console.error("error: ", error)
+            mensagemErro.value = 'Não foi possivel fazer o login com estas credenciais... ';
+            setTimeout(()=>{
+                mensagemErro.value = '';
+                credenciais.email = '';
+                credenciais.password = '';
+            }, 3000);
+        })
     } 
 
 
@@ -32,6 +53,9 @@ import { reactive } from 'vue';
                     <label for="password-input">Senha</label>
                 </FloatLabel>
                 
+            </div>
+            <div class="row-login" v-if="mensagemErro !== ''">
+                <p id="erro">{{ mensagemErro }}</p>
             </div>
             <div id="login-button">
                 <Button @click="fazerLogin" label="Entar" ></Button>
@@ -72,6 +96,10 @@ import { reactive } from 'vue';
                     width: 100px;
                     height: 30px;
                 
+                }
+                #erro{
+                    color: tomato;
+                    font-size: 0.8rem;
                 }
             }
         }
