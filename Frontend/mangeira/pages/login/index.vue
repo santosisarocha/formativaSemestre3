@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import FloatLabel from 'primevue/floatlabel';
 import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
+import { reactive } from 'vue';
+    const credenciais = reactive({
+        email: '',
+        password: ''
+    });
+
+    const fazerLogin = ()=>{
+        console.log("login: ", credenciais);
+    } 
 
 
 </script>
@@ -12,19 +22,19 @@ import InputText from 'primevue/inputtext';
             <h4 class="row-login"> Mangeira & Mangeira </h4>
             <div class="row-login">
                 <FloatLabel>
-                    <InputText id="email-input" class="input-text"/>
+                    <InputText v-model="credenciais.email" type="email" id="email-input" class="input-text"/>
                     <label for="email-input">Email</label>
                 </FloatLabel>
             </div>
             <div  class="row-login">
                 <FloatLabel>
-                    <InputText id="password-input" class="input-text"/>
+                    <InputText v-model="credenciais.password" type="password" id="password-input" class="input-text"/>
                     <label for="password-input">Senha</label>
                 </FloatLabel>
                 
             </div>
             <div id="login-button">
-                <Button label="Entar" ></Button>
+                <Button @click="fazerLogin" label="Entar" ></Button>
             </div>
 
         </section>
