@@ -33,7 +33,22 @@ const itensMenu = ref([
 <style scoped lang="scss">
     header{
         width: 100vw;
-        height: 100px;
+        height: var(--altura-header);
+        border-bottom: 1px;
+        background-color: rgb(241, 243, 229);
+        background-repeat: repeat;
+        background-size: cover;;
+
+        .p-menubar{
+            height: 50px;
+            border: none;
+            background-color: rgb(241, 243, 229);
+
+            .p-menuitem{
+                margin: 0 1rem 0 1rem;
+            }
+            
+        }
 
     }
 
