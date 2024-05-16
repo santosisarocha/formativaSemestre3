@@ -1,5 +1,10 @@
 <script setup lang="ts">
 
+// const {data: produtosFound} = await useFetch(`htt`)
+
+import {getProdutos} from '~/services/produtos';
+console.log("get")
+getProdutos()
 </script>
 
 <template>
