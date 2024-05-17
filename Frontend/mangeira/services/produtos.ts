@@ -3,13 +3,14 @@ import { BACKEND_URL } from "~/models/app";
 import type { Pagination } from "~/models/pagination";
 import type { Produto } from "~/models/produtos";
 
-export const getProdutos = (numeroPagina:number=0): Pagination<Produto>|null =>{
-    let data:  Pagination<Produto>|null = null;
-    useFetch<Pagination<Produto>>(`${BACKEND_URL}/produtos?page=${numeroPagina}`)
-        .then((response)=> {
-            data = response.data.value;
-        })
-        .catch(error=>console.error(error));
+export const getProdutos = (numeroPagina: number = 0): Promise<Pagination<Produto>|null> =>{
+    return useFetch<Pagination<Produto>>(`${BACKEND_URL}/produtos?page=${numeroPagina}`)
+        .then((response)=> Promise.resolve(response.data.value))
+        .catch(error=>{
+            console.error(error);
+            Promise.resolve(null)
+        }) as Promise<Pagination<Produto>|null>;
         
-    return data;
-};
+    };
+        
+    

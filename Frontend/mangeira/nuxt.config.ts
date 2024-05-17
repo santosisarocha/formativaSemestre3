@@ -6,7 +6,8 @@ export default defineNuxtConfig({
   },
   modules: [
     'nuxt-primevue',
-    '@sidebase/nuxt-auth'
+    '@sidebase/nuxt-auth',
+    '@pinia/nuxt'
   ],
   primevue:{
     components: {
