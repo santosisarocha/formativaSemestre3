@@ -23,11 +23,13 @@ export default defineNuxtConfig({
   auth: {
     baseURL: 'http://localhost:8000',
     provider: {
-      type: 'local',
+      type: 'refresh',
       endpoints: {
         signIn:{path: '/token/login', method: 'post'},
         signOut:{path: '/token/logout', method: 'post'},
+        signUp:{ },
         getSession:{path: '/vendas', method: 'get'},
+        refresh: {}
       },
       token: { signInResponseTokenPointer: '/auth_token', type: 'Token'},
       pages: {login: '/login'}

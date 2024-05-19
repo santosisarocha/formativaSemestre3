@@ -20,29 +20,24 @@ const produtoTeste: Produto ={
     ]
 }
 
-onMounted(()=>{
-    getProdutos().then(pagination=>{ 
-        console.log("Pagination", pagination)
-        produtos.value = pagination?.results ?? [];
-        console.log("produtos encontrados: ", produtos.value)
-    })
-})
-
-
-
+const atualizarProdutos= () => {
+    getProdutos().then((produtosEncontrados) => { 
+        console.log("Produtos encontrados:", produtosEncontrados?.results[0].nome);
+        produtos.value = produtosEncontrados?.results ?? [];
+});
+};
+atualizarProdutos();
 </script>
 
 <template>
     <main class="home-container flex flex-column align-items-center justify-content-center">
         <h1>Home</h1>
         <div class="produtos-container grid align-items-center justify-content-center">
-            <ProdutoItem class="col-4" :produto="produtoTeste" />
-            <ProdutoItem class="col-4" :produto="produtoTeste" />
-            <ProdutoItem class="col-4" :produto="produtoTeste" />
-            <ProdutoItem class="col-4" :produto="produtoTeste" />
-            <ProdutoItem class="col-4" :produto="produtoTeste" />
-            <ProdutoItem class="col-4" :produto="produtoTeste" />
-            <ProdutoItem class="col-4" :produto="produtoTeste" />
+
+            <div v-for="(produto,index) in produtos">
+                <ProdutoItem :key="index" class="col-4" :produto="produto" />
+            </div>
+        
 
         </div>
     </main>

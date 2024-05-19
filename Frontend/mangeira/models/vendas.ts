@@ -19,3 +19,10 @@ export type VendasProdutos = {
     quantidade: number;
     vendaFK: Venda
 }
+
+
+export type VendasProdutoBody = {
+    produtoFK: number;
+    quantidade: number;
+    vendaFK: number;
+}
